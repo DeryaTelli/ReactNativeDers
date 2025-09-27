@@ -8,7 +8,7 @@ import {
 import React from 'react'
 
 // const Loading = (props) => { bu sekilde de kullanabilirsin 
-    const Loading = (name, changeIsLoading) => {
+    const Loading = ({name, changeIsLoading}) => {
     return (
         <View style={styles.container}>
             <Pressable

@@ -6,14 +6,12 @@
     TextInput,
     Pressable, //bunlar buton yapmamiza yariyor 
     Image,
-    
     } from 'react-native';
 
     import React , {useState} from 'react';
-    import Loading from '../components/Loading';
+    import { Loading, CustomTextInput, CustomButton } from '../components';    
 
     const LoginPage = ({navigation})=> {
-
     // const [state, setState]=useState("") // icine koydugum tirnakdan dolayi sadece string gelecegini anliyoruz 
     
     //local depolama farkli sayfaya gitigim zaman tutum yazilar kayip olacaktir 
@@ -35,31 +33,67 @@
         // </View>
 
         <View style={styles.container}>
-
+        <Text style={styles.welcomeStyle}>Welcome {result}</Text>
         <Image 
         source={require('../../assets/images/icon.png')}
         style={styles.imageStyle}
         />
-        <Text style={styles.welcomeStyle}>Welcome {result}</Text>
-        <Text>Email</Text>
-        <TextInput
-        placeholder='Enter Your Email'
-        style={styles.textInputStyle}
-        onChangeText={setEmail}
-        value={email}
-        inputMode='email' //klavyede @ .com gibi kisayollari getirir
+
+        <CustomTextInput
+            title="Email"
+            isSecure={false}
+            handleOnChangeText={setEmail}
+            handleValue={email}
+            handlePlaceholder="Enter Your Email"
+        />
+        <CustomTextInput
+            title="Password"
+            isSecure={true}
+            handleOnChangeText={setPassword}
+            handleValue={password}
+            handlePlaceholder="Enter Your Password"
         />
 
-        <Text> Password</Text>
-        <TextInput
-        placeholder='Enter Your Password'
-        style={styles.textInputStyle}
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true} //sifre girerken yildiz yapar
+        <CustomButton
+            buttonText="Login"
+            setWidth="80%"
+            handleOnPress={()=>{setIsLoading(true)}}
+            buttonColor="gray"
+            pressedButton="blue"
+            
+        />
+        <CustomButton
+            buttonText="Sign Up"
+            setWidth="30%"
+            handleOnPress={()=>{navigation.navigate('SignUp')}}
+            buttonColor="lightblue"
+            pressedButton="gray"
         />
 
-        <Pressable
+{/* 
+        <View style={styles.inputContainer}>
+        <Text style={styles.inputBoxText}>Email</Text>
+        <TextInput
+            placeholder='Enter Your Email'
+            style={styles.textInputStyle}
+            onChangeText={setEmail}
+            value={email}
+            inputMode='email' //klavyede @ .com gibi kisayollari getirir
+        />
+        </View>
+
+        <View style={styles.inputContainer}>
+        <Text style={styles.inputBoxText}> Password</Text>
+        <TextInput
+            placeholder='Enter Your Password'
+            style={styles.textInputStyle}
+            onChangeText={setPassword}
+            value={password}
+            secureTextEntry={true} //sifre girerken yildiz yapar
+        />
+        </View> */}
+
+        {/* <Pressable
         onPress ={()=>{setIsLoading(true)}}
         // onPress={()=> setResult(name+" "+lastName)}
         style={({pressed})=> [{
@@ -73,12 +107,14 @@
         onPress ={()=> navigation.navigate('SignUp')}
         // onPress={()=> setResult(name+" "+lastName)}
         style={({pressed})=> [{
-            backgroundColor: pressed ? "gray" : "lightblue",
+            backgroundColor: pressed ? "lightblue" : "gray",
             marginTop:20,
         },styles.signUpButtonStyle]}
         >
             <Text style={styles.buttonTextStyle}>Sign Up</Text>
-        </Pressable>
+        </Pressable> */}
+
+
         {/* {isLoading ? <Loading/> : null}  eger true ise loading ol degisle bir sey yapma demek */}
         {/* {isLoading && <Loading/>}  */}
         {isLoading 
@@ -96,41 +132,14 @@
         alignItems: 'center',
         justifyContent: 'center',
     },
-    textInputStyle:{
-        borderWidth:1,
-        width: '80%',
-        height: 50,
-        borderRadious: 10,
-        marginVertical:10,
-        textAlign:'center',
-        collor:'blue',
-        fontWeight:'bold',
-    },
-    buttonStyle:{
-        width:'80%',
-        height:50,
-        borderRadius:10,
-        alignItems:'center',
-        justifyContent:'center', 
-    },
-    buttonTextStyle:{
-        fontWeight:'bold',
-        color:'white',
-    },
     imageStyle:{
         width:100,
         height:100,
+        marginBottom:20,
     },
     welcomeStyle:{
-        fontSize:26,
+        fontSize:30,
         fontWeight:'bold',
+        marginBottom:20,
     },
-    signUpButtonStyle:{
-        width:'30%',
-        height:40,
-        borderRadius:10,
-        alignItems:'center',
-        justifyContent:'center', 
-    }
-
     });
