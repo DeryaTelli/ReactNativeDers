@@ -17,7 +17,6 @@
     //local depolama farkli sayfaya gitigim zaman tutum yazilar kayip olacaktir 
     const [email, setEmail]=useState("")
     const [password, setPassword]=useState("")
-    const [result, setResult]=useState("")
     const [isLoading, setIsLoading]=useState(false)
 
     // console.log(email)
@@ -33,7 +32,7 @@
         // </View>
 
         <View style={styles.container}>
-        <Text style={styles.welcomeStyle}>Welcome {result}</Text>
+        <Text style={styles.welcomeStyle}>Welcome </Text>
         <Image 
         source={require('../../assets/images/icon.png')}
         style={styles.imageStyle}
