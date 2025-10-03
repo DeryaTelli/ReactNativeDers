@@ -9,15 +9,31 @@
     } from 'react-native';
 
     import React , {useState} from 'react';
-    import { Loading, CustomTextInput, CustomButton } from '../components';    
+    import { Loading, CustomTextInput, CustomButton } from '../components';
+    import { useSelector, useDispatch } from 'react-redux';
+    import { setEmail,setPassword,setIsLoading, setLogin } from '../redux/userSlice';    
+
 
     const LoginPage = ({navigation})=> {
     // const [state, setState]=useState("") // icine koydugum tirnakdan dolayi sadece string gelecegini anliyoruz 
     
     //local depolama farkli sayfaya gitigim zaman tutum yazilar kayip olacaktir 
-    const [email, setEmail]=useState("")
-    const [password, setPassword]=useState("")
-    const [isLoading, setIsLoading]=useState(false)
+    // const [email, setEmail]=useState("")
+    // const [password, setPassword]=useState("")
+    // const [isLoading, setIsLoading]=useState(false)
+
+    //USERSLICE ICERISINDEKI VERILERIN OKUNMASI 
+    const { email, password, isLoading } = useSelector((state) => state.user); //store icindeki user a erismek icin
+    console.log("email:", email);
+    console.log("password:", password);
+    console.log("isLoading:", isLoading);   
+
+
+    //userSlice icerisindeki reducer yapilarini kullanma veya veri gonderme 
+    const dispatch=useDispatch();
+
+
+
 
     // console.log(email)
     // console.log(password)
@@ -41,14 +57,14 @@
         <CustomTextInput
             title="Email"
             isSecure={false}
-            handleOnChangeText={setEmail}
+            handleOnChangeText={(text)=>dispatch(setEmail(text))}
             handleValue={email}
             handlePlaceholder="Enter Your Email"
         />
         <CustomTextInput
             title="Password"
             isSecure={true}
-            handleOnChangeText={setPassword}
+            handleOnChangeText={(text)=>dispatch(setPassword(text)) }
             handleValue={password}
             handlePlaceholder="Enter Your Password"
         />
@@ -56,7 +72,7 @@
         <CustomButton
             buttonText="Login"
             setWidth="80%"
-            handleOnPress={()=>{setIsLoading(true)}}
+            handleOnPress={()=>{dispatch(setLogin())}}
             buttonColor="gray"
             pressedButton="blue"
             
@@ -119,7 +135,7 @@
         {isLoading 
             ? <Loading 
             name="buttonName"
-            changeIsLoading={()=>setIsLoading(false)}/> : null}
+            changeIsLoading={()=>dispatch(setIsLoading(false))}/> : null}
         </View>
     );
     }
