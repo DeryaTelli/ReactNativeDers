@@ -7,10 +7,10 @@
     Pressable, //bunlar buton yapmamiza yariyor 
     Image,
     } from 'react-native';
-    import React , {useState} from 'react';
+    import React , {useState, useEffect} from 'react';
     import { Loading, CustomTextInput, CustomButton } from '../components';
     import { useSelector, useDispatch } from 'react-redux';
-    import { setEmail,setPassword,setIsLoading, setLogin } from '../redux/userSlice';  
+    import { setEmail,setPassword,setIsLoading, setLogin , autoLogin} from '../redux/userSlice';  
     import { login } from '../redux/userSlice';  
 
 
@@ -22,6 +22,16 @@
     const [password, setPassword]=useState("")
     // const [isLoading, setIsLoading]=useState(false)
 
+
+  
+
+
+
+
+
+
+
+
     //USERSLICE ICERISINDEKI VERILERIN OKUNMASI
     //email ve password kaldirdik suslu parantez icinden  
     const {  isLoading } = useSelector((state) => state.user); //store icindeki user a erismek icin
@@ -31,6 +41,13 @@
 
     //userSlice icerisindeki reducer yapilarini kullanma veya veri gonderme 
     const dispatch=useDispatch();
+
+
+      //kullanici daha once giris yaptiysa otomatik giris yap 
+    useEffect(()=>{
+        dispatch(autoLogin())
+    },[])
+
 
 
 
