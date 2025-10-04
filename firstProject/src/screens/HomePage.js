@@ -1,5 +1,5 @@
     import { StyleSheet, Text, View } from 'react-native'
-    import React, {useState} from 'react'
+    import React, {useState, useEffect} from 'react'
     import { collection, addDoc } from 'firebase/firestore'
     import { db } from '../../firebaseConfig'
     import {  CustomButton } from '../components';
@@ -12,7 +12,13 @@
 
         
     const [data, setData] = useState([])
+    const [isSaved, setIsSave]=useState(false)// otomatik get data demeden verileri cekmemize yardimci oluyor
     console.log("data: ",data )
+    console.log(isSaved)
+
+    useEffect(()=>{ //otomaitik olarak cekecek verileri
+        getData()
+    },[isSaved])
 
     //send data to firebase 
     const sendData=async()=>{
@@ -29,13 +35,19 @@
     }
 
     //get data from firebase 
-    const getData = async()=>{`
-`
-        const querySnapshot = await getDocs(collection(db,"reactNativeLesson"));
-        querySnapshot.forEach((doc)=>{
-            // 
-            setData([...data, doc.data()]) //...data daha onceki verileri silmicek onceki verilerin sonuna ekliyecek yenilerini 
+    const getData = async()=>{
+        const allData=[];
+        try{
+            const querySnapshot = await getDocs(collection(db,"reactNativeLesson"));
+            querySnapshot.forEach((doc)=>{
+            //setData([...data, doc.data()]) //...data daha onceki verileri silmicek onceki verilerin sonuna ekliyecek yenilerini 
+            allData.push(doc.data())
         });
+        setData(allData)
+        }catch(error){
+            console.log(error)
+        }
+        
     }
 
     //delete data from firebase 
@@ -57,12 +69,17 @@
     return (
         <View style={styles.container}>
 
-        <Text>{data[0]?.title}</Text>
-        <Text>{data[0]?.content} </Text>
-        <Text>{data[0]?.lesson}</Text>
-        <Text>{data[1]?.title}</Text>
-        <Text>{data[1]?.content} </Text>
-        <Text>{data[1]?.lesson}</Text>
+        
+        {data.map((value,index)=>{
+            return(
+                <View key={index}>
+                    <Text>{index}</Text>
+                    <Text>{value.title}</Text>
+                    <Text>{value.content} </Text>
+                    <Text>{value.lesson}</Text>
+                </View>
+            )
+        })}
 
 
         <CustomButton 
@@ -70,7 +87,7 @@
         setWidth={"40%"}
         buttonColor={"blue"}
         pressedButtonColor={"gray"}
-        handleOnPress={sendData}
+        handleOnPress={() => {sendData(),setIsSave(isSaved===false ? true : false)}}
         />
         
         <CustomButton 
