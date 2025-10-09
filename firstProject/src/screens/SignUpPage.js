@@ -1,17 +1,32 @@
     import { StyleSheet, Text, View, Image, Pressable} from 'react-native'
     import { SafeAreaView } from 'react-native-safe-area-context';
     import React, {useState} from 'react'
-    import { CustomTextInput,CustomButton } from '../components'
+    import { CustomTextInput,CustomButton, Loading } from '../components'
+    import { useDispatch, useSelector } from 'react-redux';
+    import { register } from '../redux/userSlice';
 
     
     const SignUpPage = ({navigation} ) => {
+    const dispatch=useDispatch()
+
     const [name, setName] = useState('')
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
+
+    const {isLoading}=useSelector((state)=>state.user)
+
+    const handleRegister=()=>{
+        dispatch(register({email,password}))
+    }
+
+
+    if(isLoading){
+        return <Loading />
+    }
     return (
         
         <SafeAreaView style={styles.container}>
-
+        <View>
         <View style={styles.titleContainer}>
             <Image 
                     source={require('../../assets/images/icon.png')}
@@ -50,16 +65,18 @@
             <CustomButton
                 buttonText="Sign Up"
                 setWidth="80%"
-                handleOnPress={()=>{console.log(name," ", email," ", password)}}
+                handleOnPress={handleRegister}
                 buttonColor="lightblue"
                 pressedButton="gray"
             />
-            <Pressable 
-                onPress={()=>navigation.navigate("Login")}
+            <Pressable
+                onPress={() => navigation.navigate("Login")}
             >
                 <Text style={styles.textStyle}>Already have an account? Login</Text>
             </Pressable>
         </View>
+        </View>
+
         </SafeAreaView>
         
     )

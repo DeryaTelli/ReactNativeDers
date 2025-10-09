@@ -1,4 +1,5 @@
-    import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native'
+    import { Pressable, StyleSheet, Text, View, TextInput , FlatList,} from 'react-native'
+    import { SafeAreaView } from 'react-native-safe-area-context';
     import React, {useState, useEffect} from 'react'
     import { collection, addDoc } from 'firebase/firestore'
     import { db } from '../../firebaseConfig'
@@ -6,9 +7,12 @@
     import { getDocs ,doc } from 'firebase/firestore';
     import { deleteDoc } from 'firebase/firestore';
     import { updateDoc } from 'firebase/firestore';
+    import { useDispatch } from 'react-redux';
+    import { logout } from '../redux/userSlice';
 
 
     const HomePage = () => {
+    const dispatch=useDispatch()
 
         
     const [data, setData] = useState([])
@@ -71,8 +75,30 @@
 
     }
 
+    //kullanici cikis islemleri 
+    const handleLogout=()=>{
+        try{
+            dispatch(logout())
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+
+        
+        const renderItem = ({item}) =>{
+            return(
+                <View style={styles.flatlistcontainer}>
+                    <Text>{item.id}</Text>
+                    <Text>{item.title}</Text>
+                    <Text>{item.content} </Text>
+                    <Text>{item.lesson}</Text>
+                </View>
+            )
+        }
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
 
             <TextInput
             value={updatedData}
@@ -81,8 +107,10 @@
             style={{borderWidth:1, width:'50%',paddingVertical:10, textAlign:'center', marginBottom:20}}
             />
 
+
+    
         
-        {data.map((value,index)=>{
+        {/* {data.map((value,index)=>{
             return(
                 <Pressable 
                 onPress={()=>{updateData(value.id), setIsSave(isSaved===false ? true : false)}}
@@ -94,7 +122,16 @@
                     <Text>{value.lesson}</Text>
                 </Pressable>
             )
-        })}
+        })} */}
+
+        <FlatList
+            style={styles.flatlist}
+            data={data}
+            keyExtractor={(item)=>item.id}
+            renderItem={renderItem}
+            
+        />
+            
 
 
         <CustomButton 
@@ -128,7 +165,16 @@
         pressedButtonColor={"gray"}
         handleOnPress={updateData}
         />
-        </View>
+
+        <CustomButton 
+        buttonText={'Logout'} 
+        setWidth={"40%"}
+        buttonColor={"red"}
+        pressedButtonColor={"gray"}
+        handleOnPress={handleLogout}
+        />
+
+        </SafeAreaView>
     )
     }
 
@@ -139,5 +185,17 @@
             flex:1,
             alignItems:'center',
             justifyContent:'center',
+        },
+        flatlistcontainer:{
+            borderWidth:1,
+            marginVertical:5,
+            flex:1,
+            alignItems:'center',
+            justifyContent:'center',
+        },
+        flatlist:{
+            width:'90%',
+            borderWidth:2,
+            padding:10,
         }
     })
