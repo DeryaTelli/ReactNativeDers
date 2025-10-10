@@ -99,30 +99,11 @@
 
     return (
         <SafeAreaView style={styles.container}>
-
-            <TextInput
-            value={updatedData}
-            onChangeText={setUpdateData}
-            placeholder='Enter Your data'
-            style={{borderWidth:1, width:'50%',paddingVertical:10, textAlign:'center', marginBottom:20}}
-            />
+        <Text style={styles.title}> To Do List</Text>
 
 
     
         
-        {/* {data.map((value,index)=>{
-            return(
-                <Pressable 
-                onPress={()=>{updateData(value.id), setIsSave(isSaved===false ? true : false)}}
-                key={index}>
-                    <Text>{index}</Text>
-                    <Text>{value.id}</Text>
-                    <Text>{value.title}</Text>
-                    <Text>{value.content} </Text>
-                    <Text>{value.lesson}</Text>
-                </Pressable>
-            )
-        })} */}
 
         <FlatList
             style={styles.flatlist}
@@ -134,13 +115,7 @@
             
 
 
-        <CustomButton 
-        buttonText={'Save'} 
-        setWidth={"40%"}
-        buttonColor={"blue"}
-        pressedButtonColor={"gray"}
-        handleOnPress={() => {sendData(),setIsSave(isSaved===false ? true : false)}}
-        />
+
         
         <CustomButton 
         buttonText={'Get Data'} 
@@ -150,29 +125,14 @@
         handleOnPress={getData}
         />
 
-        <CustomButton 
-        buttonText={'Delete Data'} 
-        setWidth={"40%"}
-        buttonColor={"blue"}
-        pressedButtonColor={"gray"}
-        handleOnPress={deleteData}
+        <TextInput
+        value={updatedData}
+        onChangeText={setUpdateData}
+        placeholder='Enter Your data'
+        style={{borderWidth:1, width:'50%',paddingVertical:10, textAlign:'center', marginBottom:20}}
         />
 
-        <CustomButton 
-        buttonText={'Update'} 
-        setWidth={"40%"}
-        buttonColor={"blue"}
-        pressedButtonColor={"gray"}
-        handleOnPress={updateData}
-        />
 
-        <CustomButton 
-        buttonText={'Logout'} 
-        setWidth={"40%"}
-        buttonColor={"red"}
-        pressedButtonColor={"gray"}
-        handleOnPress={handleLogout}
-        />
 
         </SafeAreaView>
     )
@@ -187,15 +147,19 @@
             justifyContent:'center',
         },
         flatlistcontainer:{
-            borderWidth:1,
-            marginVertical:5,
+            borderBottomWidth:0.5,
+            marginVertical:10,
             flex:1,
             alignItems:'center',
             justifyContent:'center',
         },
         flatlist:{
             width:'90%',
-            borderWidth:2,
             padding:10,
+        },
+        title:{
+            fontSize:24,
+            fontWeight:'bold',
+            color:'blue',
         }
     })
