@@ -1,13 +1,11 @@
-    import { Animated as RNAnimated, StyleSheet, Text, View , Pressable, Animated} from 'react-native'
+    import { StyleSheet, Text, Pressable} from 'react-native'
     import React from 'react'
-import Animated, { FadeIn } from 'react-native-reanimated';
+    
     const CustomButton = ({buttonText, setWidth, handleOnPress, buttonColor, pressedButton}) => {
     
-    const  AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-
+    
     return (
-        <AnimatedPressable
-            entering={FadeIn.duration(200)}
+        <Pressable
             onPress={()=>handleOnPress()}
             style={({pressed})=> [{
                     backgroundColor: pressed ? pressedButton : buttonColor,
@@ -15,7 +13,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
                 },styles.buttonStyle]}
                 >
                     <Text style={styles.buttonTextStyle}>{buttonText}</Text>
-            </AnimatedPressable>
+        </Pressable>
     )
     }
 
