@@ -1,54 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import {  StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CoursesScreen from './src/screens/CoursesScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
+
+const Stack = createNativeStackNavigator();
 export default function App() {
-  const message ='JavaScript ';
-  const courses=[
-    {id:1 , name: 'Flutter'},
-    {id:2 , name: 'React Native'},
-    {id:3 , name: 'Swift'},
-    {id:4 , name: 'Kotlin'},
-  ];
+  //const message="Welcome to React Native";
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>React Native</Text>
-      <Text style={styles.content}>React Js</Text>
-      <Text style={styles.content}>{message}</Text>
-      <FlatList
-      //hep dikey siralanir bu ama yatay sirali istersen 
-      //horizontal={true} //yatay yapar
-      //showsHorizontalScrollIndicator={false} // yatay scroll bar i kaldirir
-        data={courses}
-        keyExtractor={(item)=>item.id.toString()} // elemanlarin farkli oldugunu bunun sayesinde anliyoruz 
-        renderItem={({item})=>( <Text style={styles.listContent}>{item.name}</Text>
-        )}
-      />
-      
-    </View>
+        // <Text style={styles.title}>React Native</Text>
+        // <Text style={styles.content}>React Js</Text>
+        // <Text style={styles.content}>{message}</Text>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Courses Screen" component={CoursesScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
+    container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title:{
+    },
+    title:{
     fontSize:35,
     fontWeight:'bold'
-  },
-  content:{
+    },
+    content:{
     fontSize:24,
     fontWeight:'normal'
-  },
-  listContent:{
-    fontSize:20,
-    fontWeight:'normal',
-    color:'blue',
-    backgroundColor:'yellow',
-    marginVertical:10,
-    padding:12,
-  }
+    },
 });
+
+
