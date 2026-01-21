@@ -5,7 +5,7 @@ import CoursesScreen from './src/screens/CoursesScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import CoursesInformationScreen from './src/screens/CoursesInformationScreen';
 import CounterScreen from './src/screens/CounterScreen';
-
+import  BoxScreen from './src/screens/BoxScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   //const message="Welcome to React Native";
@@ -19,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Courses Screen" component={CoursesScreen}/>
         <Stack.Screen name="Courses Information" component={CoursesInformationScreen}/>
         <Stack.Screen name="Counter App" component={CounterScreen}/>
+        <Stack.Screen name="Box App" component={BoxScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
     
