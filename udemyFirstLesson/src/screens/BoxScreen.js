@@ -1,5 +1,5 @@
     import { StyleSheet, Text, View ,Button , FlatList} from 'react-native'
-    import React, {useState} from 'react'
+    import React, {useState } from 'react'
 
     export default function BoxScreen() {
         const [colors, setColors] = useState([]);
@@ -12,7 +12,6 @@
 
     return (
         <View>
-        <Text>BoxScreen</Text>
         <Button 
         title='Box Add'
         onPress={()=>{
