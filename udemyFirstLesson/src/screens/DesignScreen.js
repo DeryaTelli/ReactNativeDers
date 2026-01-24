@@ -4,7 +4,9 @@
     export default function DesignScreen() {
     return (
         <View style={styles.mainView}>
-            <Text style={styles.mainText}>Layout</Text>
+            <Text style={styles.mainText}>1</Text>
+            <Text style={styles.mainText}>2</Text>
+            <Text style={styles.mainText}>3</Text>
             {/* <View
             style={{width:50, height:50, backgroundColor:'pink', }}
             />
@@ -24,6 +26,9 @@
             borderColor:'pink',
             margin:20,
             borderRadius:10,
+            //alignItems:'stretch', hic bir sey degistirmeyen deger 
+            alignItems:'flex-start' // baslangica gelir deger 
+
         },
         mainText:{
             borderWidth:1,
@@ -35,6 +40,7 @@
             //paddingHorizontal:20, // sadece x ekseninde icerde bosluk vericek
             //paddingVertical:20, // sadece y ekseninde icerde bosluk vericek
             borderRadius:10, // koseleri yuvarlatir
+
         }
 
 
