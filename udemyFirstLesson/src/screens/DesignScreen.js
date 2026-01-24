@@ -4,9 +4,9 @@
     export default function DesignScreen() {
     return (
         <View style={styles.mainView}>
-            <Text style={styles.mainText}>1</Text>
-            <Text style={styles.mainText}>2</Text>
-            <Text style={styles.mainText}>3</Text>
+            <Text style={styles.mainTextOne}>1</Text>
+            <Text style={styles.mainTextTwo}>2</Text>
+            <Text style={styles.mainTextThree}>3</Text>
             {/* <View
             style={{width:50, height:50, backgroundColor:'pink', }}
             />
@@ -24,23 +24,45 @@
         mainView:{
             borderWidth:3,
             borderColor:'pink',
-            margin:20,
+            margin:10,
             borderRadius:10,
             //alignItems:'stretch', hic bir sey degistirmeyen deger 
-            alignItems:'flex-start' // baslangica gelir deger 
+            //alignItems:'flex-start', // baslangica gelir deger  
+            //flexDirection: 'row', // yada yada dikeyde hizalama nesneleri 
+           // justifyContent: 'center', // yatayda hizalama yapiyor ortaliyor 
+            height: 400
+
 
         },
-        mainText:{
+        mainTextOne:{
             borderWidth:1,
             borderColor:'red',
-            margin:30, // x ve y ekseninda  disa dogru bosluk vericek 
+            margin:10, // x ve y ekseninda  disa dogru bosluk vericek 
             //marginHorizontal:20, // sadece x ekseninde bosluk vericek
             //marginVertical:20, // sadece y ekseninde bosluk vericek
             padding:20, // icerde bosluk vericek
             //paddingHorizontal:20, // sadece x ekseninde icerde bosluk vericek
             //paddingVertical:20, // sadece y ekseninde icerde bosluk vericek
             borderRadius:10, // koseleri yuvarlatir
-
+            felx:4
+        },
+        mainTextTwo:{
+            borderWidth:1,
+            borderColor:'red',
+            margin:10,
+            padding:20,
+            borderRadius:10,
+            flex:5 // bos alani kapliyor 
+            
+        },
+        mainTextThree:{
+            borderWidth:1,
+            borderColor:'red',
+            margin:10,
+            padding:20,
+            borderRadius:10,
+            flex:1
+            
         }
 
 
