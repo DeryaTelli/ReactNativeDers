@@ -8,6 +8,7 @@ import  BoxScreen from './src/screens/BoxScreen';
 import ColorChangeScreen from './src/screens/ColorChangeScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import PasswordScreen from './src/screens/PasswordScreen';
+import DesignScreen from './src/screens/DesignScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   //const message="Welcome to React Native";
@@ -24,6 +25,8 @@ export default function App() {
         <Stack.Screen name="Box App" component={BoxScreen}/>
         <Stack.Screen name="Color Change App" component={ColorChangeScreen}/>
         <Stack.Screen name="Password Screen" component={PasswordScreen}/>
+        <Stack.Screen name="Design Screen" component={DesignScreen}/>
+
       </Stack.Navigator>
     </NavigationContainer>
     
