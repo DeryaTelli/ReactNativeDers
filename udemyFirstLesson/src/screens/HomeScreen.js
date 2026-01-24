@@ -40,6 +40,11 @@ export default function HomeScreen({navigation}) {
         title='Design Screen'
         onPress={()=> navigation.navigate('Design Screen') }
         />
+        <Button
+        style={styles.button}
+        title='Homework Screen'
+        onPress={()=> navigation.navigate('Homework Screen') }
+        />
     </View>
     )
 }
